@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-rokit install
+if [[ "${CI:-}" == "true" ]]; then
+  rokit install --no-trust-check
+else
+  rokit install
+fi
 stylua --check src tests
 selene src tests
 

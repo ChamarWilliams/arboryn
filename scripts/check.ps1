@@ -1,6 +1,10 @@
 $ErrorActionPreference = 'Stop'
 
-rokit install
+if ($env:CI -eq 'true') {
+    rokit install --no-trust-check
+} else {
+    rokit install
+}
 stylua --check src tests
 selene src tests
 
