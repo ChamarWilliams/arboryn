@@ -1,0 +1,6 @@
+{
+  "name": "ArborynPhase0Smoke",
+  "tree": {
+    "$className": "DataModel"
+  }
+}

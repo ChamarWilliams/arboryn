@@ -1,0 +1,27 @@
+name: Phase 0 checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: CompeyDev/setup-rokit@v0.1.2
+        with:
+          version: v1.2.0
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/check.ps1
+      - if: runner.os != 'Windows'
+        shell: bash
+        run: ./scripts/check.sh
